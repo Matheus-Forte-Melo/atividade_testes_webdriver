@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Software com Condicional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .page-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Classe CSS para o container dos resultados (A e B) que usa flexbox para layout interno */
+        .page-content-flex {
+            display: flex;
+            flex-direction: column; /* Sugestão: para organizar o conteúdo verticalmente */
+            align-items: flex-start; /* Sugestão: para alinhar o conteúdo à esquerda */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" class="page-container">
+
+        <div id="page-index" class="w-full max-w-md bg-white p-8 rounded-xl shadow-2xl transition-opacity duration-500">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">Início do Teste Condicional</h1>
+            <p class="text-gray-600 mb-6 text-center">Insira um número para simular um teste de software.</p>
+
+            <label for="userInput" class="block text-sm font-medium text-gray-700 mb-2">Valor de Entrada (Número):</label>
+            <input type="number" id="userInput" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150" placeholder="Ex: 10, -5, 0">
+
+            <div id="errorMessage" class="text-red-600 mt-2 text-sm hidden">Por favor, insira um número válido.</div>
+
+            <button onclick="runTest()" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md">
+                Executar Teste
+            </button>
+        </div>
+
+        <div id="page-a" class="hidden w-full max-w-lg bg-green-50 p-10 rounded-xl shadow-2xl border-l-4 border-green-500 transition-opacity duration-500">
+            <div class="flex items-center mb-6">
+                <svg class="w-8 h-8 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h2 class="text-3xl font-bold text-green-700">Página 2: Resultado POSITIVO</h2>
+            </div>
+            <p class="text-lg text-gray-700 mb-4">
+                <strong>Condição Avaliada:</strong> O número de entrada é <span class="font-bold text-green-800">MAIOR QUE ZERO (> 0)</span>.
+            </p>
+            <p class="text-gray-600 mb-8">
+                O teste direcionou o fluxo para o <strong>Cenário A</strong>. Este caminho é executado quando a entrada satisfaz a primeira condição de teste.
+            </p>
+            <p class="text-2xl font-extrabold text-green-900" id="resultValueA"></p>
+
+            <button onclick="goToIndex()" class="mt-8 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
+                Novo Teste
+            </button>
+        </div>
+
+        <div id="page-b" class="hidden w-full max-w-lg bg-red-50 p-10 rounded-xl shadow-2xl border-l-4 border-red-500 transition-opacity duration-500">
+            <div class="flex items-center mb-6">
+                <svg class="w-8 h-8 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <h2 class="text-3xl font-bold text-red-700">Página 3: Resultado ZERO ou NEGATIVO</h2>
+            </div>
+            <p class="text-lg text-gray-700 mb-4">
+                <strong>Condição Avaliada:</strong> O número de entrada é <span class="font-bold text-red-800">MENOR ou IGUAL A ZERO (≤ 0)</span>.
+            </p>
+            <p class="text-gray-600 mb-8">
+                O teste direcionou o fluxo para o <strong>Cenário B</strong>. Este caminho é executado quando a entrada atende à condição de teste alternativa.
+            </p>
+            <p class="text-2xl font-extrabold text-red-900" id="resultValueB"></p>
+
+            <button onclick="goToIndex()" class="mt-8 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200">
+                Novo Teste
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Mapeamento dos elementos DOM
+        const pageIndex = document.getElementById('page-index');
+        const pageA = document.getElementById('page-a');
+        const pageB = document.getElementById('page-b');
+        const userInput = document.getElementById('userInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const resultValueA = document.getElementById('resultValueA');
+        const resultValueB = document.getElementById('resultValueB');
+
+        /**
+         * Função para alternar a exibição das "páginas".
+         * @param {HTMLElement} showPage - A página a ser exibida.
+         * @param {HTMLElement[]} hidePages - Um array das páginas a serem ocultadas.
+         */
+        function switchPage(showPage, hidePages) {
+            hidePages.forEach(page => {
+                // Ao ocultar, remove 'flex' caso tenha sido adicionado.
+                page.classList.add('hidden');
+                page.classList.remove('flex'); 
+            });
+            showPage.classList.remove('hidden');
+            // ATENÇÃO: Se as páginas de resultado (A e B) PRECISAM do 'flex' para o seu layout interno,
+            // você deve adicioná-lo de forma condicional, ou, melhor, *diretamente no HTML delas*.
+            // Vamos adicionar o 'flex' apenas nas páginas que realmente o utilizam (A e B) ou removê-lo completamente daqui.
+            
+            // CORREÇÃO: Removendo o .classList.add('flex') daqui, e adicionando uma classe
+            // separada (.page-content-flex) se for necessário controlar o layout interno das páginas A e B.
+
+            // Para garantir que as páginas A e B, que têm um layout de conteúdo mais estruturado,
+            // usem flexbox, você pode adicioná-lo no HTML das páginas A e B se necessário. 
+            // Para a página INDEX, o flexbox interno não é necessário.
+
+            // *Para garantir que a page-index NUNCA receba 'flex'*, 
+            // vamos apenas remover a linha 'showPage.classList.add('flex');'
+            // O código abaixo é a solução mais simples para o seu problema.
+            // showPage.classList.add('flex'); // <--- Linha original removida/comentada
+        }
+
+        /**
+         * Função principal que executa o teste condicional.
+         */
+        function runTest() {
+            const value = parseFloat(userInput.value.trim());
+
+            // 1. Validação da Entrada
+            if (isNaN(value)) {
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+            errorMessage.classList.add('hidden');
+
+            // 2. Estrutura Condicional (O coração do teste de software)
+            if (value > 0) {
+                // Se o número for POSITIVO, chama a Página 2 (Cenário A)
+                resultValueA.textContent = `O valor de entrada foi: ${value}`;
+                // Adicione 'flex' explicitamente às páginas A e B (ou adicione no HTML delas).
+                pageA.classList.add('flex'); // Adicione 'flex' apenas à página A (resultado)
+                switchPage(pageA, [pageIndex, pageB]);
+            } else {
+                // Se o número for ZERO ou NEGATIVO, chama a Página 3 (Cenário B)
+                resultValueB.textContent = `O valor de entrada foi: ${value}`;
+                // Adicione 'flex' explicitamente às páginas A e B (ou adicione no HTML delas).
+                pageB.classList.add('flex'); // Adicione 'flex' apenas à página B (resultado)
+                switchPage(pageB, [pageIndex, pageA]);
+            }
+        }
+
+        /**
+         * Função para retornar à página inicial.
+         */
+        function goToIndex() {
+            userInput.value = ''; // Limpa o input
+            // Ao voltar para o Index, garanta que 'flex' não seja adicionado
+            switchPage(pageIndex, [pageA, pageB]);
+        }
+    </script>
+
+</body>
+</html>
