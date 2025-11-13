@@ -1,0 +1,184 @@
+{
+  "id": "677aeda4-8780-40ec-a40c-aae561871f0d",
+  "version": "2.0",
+  "name": "TesteWeb Aula12",
+  "url": "https://matheus-forte-melo.github.io/atividade_testes_webdriver/index_ex.html",
+  "tests": [{
+    "id": "cab2c464-2d57-4bd8-a545-33a7ec44e3a0",
+    "name": "Testes pela IDE",
+    "commands": [{
+      "id": "9897f5ab-9bc2-4ec4-b1c7-880f7a9ef990",
+      "comment": "",
+      "command": "open",
+      "target": "https://matheus-forte-melo.github.io/atividade_testes_webdriver/index_ex.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "165d6e30-e684-47e0-9555-230a908b66db",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "994x693",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1c90248b-dc46-4dbb-b927-ba28e287f142",
+      "comment": "Se mudar o target para 0 ou menor ele entra no else",
+      "command": "store",
+      "target": "10",
+      "targets": [],
+      "value": "inputValue"
+    }, {
+      "id": "c44cc3fe-8f69-41ca-829b-62b186d763f1",
+      "comment": "",
+      "command": "click",
+      "target": "id=userInput",
+      "targets": [
+        ["id=userInput", "id"],
+        ["css=#userInput", "css:finder"],
+        ["xpath=//input[@id='userInput']", "xpath:attributes"],
+        ["xpath=//div[@id='page-index']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5add3cd5-05b4-4a8c-ab98-81baacc2778a",
+      "comment": "",
+      "command": "type",
+      "target": "id=userInput",
+      "targets": [],
+      "value": "${inputValue} "
+    }, {
+      "id": "e1ea49f1-6fc8-4ac4-91d4-e0b9465d90f7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-6",
+      "targets": [
+        ["css=.mt-6", "css:finder"],
+        ["xpath=//button[@onclick='runTest()']", "xpath:attributes"],
+        ["xpath=//div[@id='page-index']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Executar Teste')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9e44cd5-5542-4841-ab1b-0d55fe20d51e",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "1000"
+    }, {
+      "id": "c6eccbd6-f328-4ce0-aed7-cbc4d2f3c83a",
+      "comment": "",
+      "command": "if",
+      "target": "${inputValue} > 0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f7de60c3-3455-488c-bddb-a04606d8323f",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "page-a",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "22d31031-6e9d-49a2-b7a9-26317bc0ba03",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "page-a",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "47a46649-aa9c-491f-9805-59247f8e9549",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-green-600",
+      "targets": [
+        ["css=.bg-green-600", "css:finder"],
+        ["xpath=//button[@onclick='goToIndex()']", "xpath:attributes"],
+        ["xpath=//div[@id='page-a']/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Novo Teste')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "83594f71-b8f4-412a-9944-2b843a9e102b",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "page-index",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "b8d3a339-9e07-4e83-980c-18a783408675",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "page-index",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "64b01263-354b-461f-baaf-1e93ea3e7e17",
+      "comment": "",
+      "command": "else",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f16ddcd2-a57c-4211-a6c5-7e52c402898f",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "page-b",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "8c620cfa-6bdb-4b0c-b396-5b7e6ec06e90",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "page-b",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "38a2b110-3635-4572-af4d-4f8ac30c1415",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=(//button[@onclick='goToIndex()'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='page-b']/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c23ff192-6baf-4c1d-92b3-7438329f2522",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "page-index",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "5092b93f-3518-49d2-91aa-01381f1bdaa2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "page-index",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "28c50bac-12a7-4a8e-9fc2-03f1b6404e58",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6d02dce2-131b-4dfc-8a7d-0d23689520be",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["cab2c464-2d57-4bd8-a545-33a7ec44e3a0"]
+  }],
+  "urls": ["https://matheus-forte-melo.github.io/atividade_testes_webdriver/index_ex.html"],
+  "plugins": []
+}
