@@ -1,6 +1,6 @@
 # atividade_testes_webdriver
 
-Script de testes automatizados usando Selenium WebDriver para validar o fluxo condicional da página hospedada em [GitHub Pages](https://matheus-forte-melo.github.io/atividade_testes_webdriver/index_ex.html).
+Script de testes automatizados (e tambem arquivos de teste web) usando Selenium WebDriver para validar o fluxo condicional da página hospedada em [GitHub Pages](https://matheus-forte-melo.github.io/atividade_testes_webdriver/index_ex.html).
 
 ## Pré-requisitos
 
